@@ -8,7 +8,10 @@ import androidx.palette.graphics.Palette;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
@@ -51,6 +54,7 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnC
         getIntentMethod();
         song_name.setText(listSongs.get(position).getTitle());
         artist_name.setText(listSongs.get(position).getArtist());
+        mediaPlayer.setOnCompletionListener(this);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -126,8 +130,9 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnC
                 handler.postDelayed(this, 1000);
             }
         });
-            playPauseBtn.setImageResource(R.drawable.ic_pause_3);
-            mediaPlayer.start();
+        mediaPlayer.setOnCompletionListener(this);
+        playPauseBtn.setBackgroundResource(R.drawable.ic_pause_3);
+        mediaPlayer.start();
     }
 
     private void nextThreadBtn() {
@@ -166,7 +171,8 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnC
                 handler.postDelayed(this, 1000);
             }
         });
-        playPauseBtn.setImageResource(R.drawable.ic_pause_3);
+        mediaPlayer.setOnCompletionListener(this);
+        playPauseBtn.setBackgroundResource(R.drawable.ic_pause_3);
         mediaPlayer.start();
 
     }
@@ -191,32 +197,21 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnC
         if (mediaPlayer.isPlaying()) {
             playPauseBtn.setImageResource(R.drawable.ic_play_3);
             mediaPlayer.pause();
-            seekBar.setMax(mediaPlayer.getDuration() / 1000);
-            PlayerActivity.this.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (mediaPlayer != null) {
-                        int mCurrentPosition = mediaPlayer.getCurrentPosition() / 1000;
-                        seekBar.setProgress(mCurrentPosition);
-                    }
-                    handler.postDelayed(this, 1000);
-                }
-            });
         } else {
             playPauseBtn.setImageResource(R.drawable.ic_pause_3);
             mediaPlayer.start();
-            seekBar.setMax(mediaPlayer.getDuration() / 1000);
-            PlayerActivity.this.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (mediaPlayer != null) {
-                        int mCurrentPosition = mediaPlayer.getCurrentPosition() / 1000;
-                        seekBar.setProgress(mCurrentPosition);
-                    }
-                    handler.postDelayed(this, 1000);
-                }
-            });
         }
+        seekBar.setMax(mediaPlayer.getDuration() / 1000);
+        PlayerActivity.this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (mediaPlayer != null) {
+                    int mCurrentPosition = mediaPlayer.getCurrentPosition() / 1000;
+                    seekBar.setProgress(mCurrentPosition);
+                }
+                handler.postDelayed(this, 1000);
+            }
+        });
     }
 
     private String formattedTime(int mCurrentPosition) {
@@ -322,10 +317,14 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnC
                 }
             });
         } else {
-            Glide.with(this)
-                    .asBitmap()
-                    .load(R.drawable.default_img_3)
-                    .into(cover_art);
+//            Glide.with(this)
+//                    .asBitmap()
+//                    .load(R.drawable.default_img_3)
+//                    .into(cover_art);
+//            Context context;
+            Bitmap bitmap2 = ((BitmapDrawable)getResources().getDrawable(R.drawable.default_img_3)).getBitmap();
+//            Bitmap bitmap2 = drawableToBitmap(R.drawable.default_img_3);
+            ImageAnimation(this, cover_art, bitmap2);
             ImageView gradient = findViewById(R.id.imageViewGradient);
             ConstraintLayout mContainer = findViewById(R.id.mContainer); // or Relative
             gradient.setBackgroundResource(R.drawable.gradient_bg);
@@ -336,6 +335,28 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnC
             backBtn.setColorFilter(Color.WHITE);
             menuBtn.setColorFilter(Color.WHITE);
         }
+    }
+
+    public static Bitmap drawableToBitmap (Drawable drawable) {
+        Bitmap bitmap = null;
+
+        if (drawable instanceof BitmapDrawable) {
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+            if (bitmapDrawable.getBitmap() != null) {
+                return bitmapDrawable.getBitmap();
+            }
+        }
+
+        if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
+            bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
+        } else {
+            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        }
+
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bitmap;
     }
 
     public void ImageAnimation(Context context, ImageView imageView, Bitmap bitmap) {

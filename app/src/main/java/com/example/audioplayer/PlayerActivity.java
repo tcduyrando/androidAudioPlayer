@@ -36,16 +36,19 @@ import static com.example.audioplayer.MainActivity.musicFiles;
 
 public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnCompletionListener {
 
-    TextView song_name, artist_name, duration_played, duration_total, textNowPlaying;
-    ImageView cover_art, nextBtn, prevBtn, backBtn, menuBtn, shuffleBtn, repeatBtn;
-    FloatingActionButton playPauseBtn;
-    SeekBar seekBar;
-    int position = -1;
-    static ArrayList<MusicFiles> listSongs = new ArrayList<>();
-    static Uri uri;
-    static MediaPlayer mediaPlayer;
+    private TextView song_name, artist_name, duration_played, duration_total, textNowPlaying;
+    private ImageView cover_art, nextBtn, prevBtn, backBtn, menuBtn;
+    private FloatingActionButton playPauseBtn, shuffleBtn, repeatBtn;
+    private SeekBar seekBar;
+    private int position = -1;
+    private static ArrayList<MusicFiles> listSongs = new ArrayList<>();
+    private static Uri uri;
+    private static MediaPlayer mediaPlayer;
     private Handler handler = new Handler();
-    private Thread playThread, prevThread, nextThread;
+    private Thread playThread, prevThread, nextThread, shuffleThread, repeatThread;
+    private boolean onRepeat = false;
+    private boolean onShuffle = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +94,8 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnC
         playThreadBtn();
         nextThreadBtn();
         prevThreadBtn();
+        shuffleThreadBtn();
+        repeatThreadBtn();
         super.onResume();
     }
 
@@ -131,7 +136,7 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnC
             }
         });
         mediaPlayer.setOnCompletionListener(this);
-        playPauseBtn.setBackgroundResource(R.drawable.ic_pause_3);
+        playPauseBtn.setImageResource(R.drawable.ic_pause_3);
         mediaPlayer.start();
     }
 
@@ -172,9 +177,61 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnC
             }
         });
         mediaPlayer.setOnCompletionListener(this);
-        playPauseBtn.setBackgroundResource(R.drawable.ic_pause_3);
+        playPauseBtn.setImageResource(R.drawable.ic_pause_3);
         mediaPlayer.start();
 
+    }
+
+    private void shuffleThreadBtn() {
+        shuffleThread = new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                shuffleBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        shuffleBtnClicked();
+                    }
+                });
+            }
+        };
+        shuffleThread.start();
+    }
+
+    private void shuffleBtnClicked() {
+        if (this.onShuffle) {
+            this.onShuffle = false;
+            shuffleBtn.setImageResource(R.drawable.ic_shuffle_off);
+        } else {
+            this.onShuffle = true;
+            shuffleBtn.setImageResource(R.drawable.ic_shuffle_on);
+        }
+    }
+
+    private void repeatThreadBtn() {
+        repeatThread = new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                repeatBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        repeatBtnClicked();
+                    }
+                });
+            }
+        };
+        repeatThread.start();
+    }
+
+    private void repeatBtnClicked() {
+        if (this.onRepeat) {
+            this.onRepeat = false;
+            repeatBtn.setImageResource(R.drawable.ic_repeat_off);
+        } else {
+            this.onRepeat = true;
+            repeatBtn.setImageResource(R.drawable.ic_repeat_on);
+        }
     }
 
     private void playThreadBtn() {

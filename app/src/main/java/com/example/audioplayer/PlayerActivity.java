@@ -3,6 +3,7 @@ package com.example.audioplayer;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.palette.graphics.Palette;
 
 import android.content.Context;
@@ -31,14 +32,15 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import static com.example.audioplayer.MainActivity.musicFiles;
 
 public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnCompletionListener {
 
     private TextView song_name, artist_name, duration_played, duration_total, textNowPlaying;
-    private ImageView cover_art, nextBtn, prevBtn, backBtn, menuBtn;
-    private FloatingActionButton playPauseBtn, shuffleBtn, repeatBtn;
+    private ImageView cover_art, nextBtn, prevBtn, backBtn, menuBtn, shuffleBtn, repeatBtn;
+    private FloatingActionButton playPauseBtn;
     private SeekBar seekBar;
     private int position = -1;
     private static ArrayList<MusicFiles> listSongs = new ArrayList<>();
@@ -157,8 +159,14 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnC
     }
 
     private void nextBtnClicked() {
+        Random random = new Random();
         mediaPlayer.stop();
         mediaPlayer.release();
+//        if (this.onShuffle || !this.onRepeat) {
+//            position = random.nextInt(listSongs.size()-1);
+//        } else if (!this.onShuffle || !this.onRepeat) {
+//            position = ((position + 1) % listSongs.size());
+//        }
         position = ((position + 1) % listSongs.size());
         uri = Uri.parse(listSongs.get(position).getPath());
         mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
@@ -201,10 +209,10 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnC
     private void shuffleBtnClicked() {
         if (this.onShuffle) {
             this.onShuffle = false;
-            shuffleBtn.setImageResource(R.drawable.ic_shuffle_off);
+            shuffleBtn.setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorGrey, null));
         } else {
             this.onShuffle = true;
-            shuffleBtn.setImageResource(R.drawable.ic_shuffle_on);
+            shuffleBtn.setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorBlue, null));
         }
     }
 
@@ -227,10 +235,10 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnC
     private void repeatBtnClicked() {
         if (this.onRepeat) {
             this.onRepeat = false;
-            repeatBtn.setImageResource(R.drawable.ic_repeat_off);
+            repeatBtn.setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorGrey, null));
         } else {
             this.onRepeat = true;
-            repeatBtn.setImageResource(R.drawable.ic_repeat_on);
+            repeatBtn.setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorBlue, null));
         }
     }
 

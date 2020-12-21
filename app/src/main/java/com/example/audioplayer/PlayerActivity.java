@@ -162,11 +162,11 @@ public class PlayerActivity extends AppCompatActivity implements MediaPlayer.OnC
         Random random = new Random();
         mediaPlayer.stop();
         mediaPlayer.release();
-//        if (this.onShuffle || !this.onRepeat) {
-//            position = random.nextInt(listSongs.size()-1);
-//        } else if (!this.onShuffle || !this.onRepeat) {
-//            position = ((position + 1) % listSongs.size());
-//        }
+        if (this.onShuffle || !this.onRepeat) {
+            position = random.nextInt(listSongs.size()-1);
+        } else if (!this.onShuffle || !this.onRepeat) {
+            position = ((position + 1) % listSongs.size());
+        }
         position = ((position + 1) % listSongs.size());
         uri = Uri.parse(listSongs.get(position).getPath());
         mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);

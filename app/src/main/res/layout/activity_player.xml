@@ -193,7 +193,6 @@
             android:background="@null"
             android:contentDescription="@string/app_name"
             android:src="@drawable/ic_shuffle_off"
-            android:tint="@color/colorGrey"
             app:layout_constraintBottom_toBottomOf="@id/play_pause"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/play_pause" />
@@ -207,7 +206,6 @@
             android:background="@null"
             android:contentDescription="@string/app_name"
             android:src="@drawable/ic_repeat_off"
-            android:tint="@color/colorGrey"
             app:layout_constraintBottom_toBottomOf="@id/play_pause"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/play_pause" />

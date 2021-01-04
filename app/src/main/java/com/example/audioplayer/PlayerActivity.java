@@ -39,7 +39,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import static com.example.audioplayer.AlbumDetailsAdapter.albumFiles;
-import static com.example.audioplayer.MainActivity.musicFiles;
+//import static com.example.audioplayer.MainActivity.musicFiles;
 import static com.example.audioplayer.MainActivity.repeatBoolean;
 import static com.example.audioplayer.MainActivity.shuffleBoolean;
 import static com.example.audioplayer.MusicAdapter.mFiles;
@@ -101,6 +101,7 @@ public class PlayerActivity extends AppCompatActivity
             }
         });
         shuffleBtn.setOnClickListener(new View.OnClickListener() {
+            //Shuffle button handler
             @Override
             public void onClick(View v) {
                 if (shuffleBoolean) {
@@ -113,6 +114,7 @@ public class PlayerActivity extends AppCompatActivity
             }
         });
         repeatBtn.setOnClickListener(new View.OnClickListener() {
+            //Repeat button handler
             @Override
             public void onClick(View v) {
                 if (repeatBoolean) {

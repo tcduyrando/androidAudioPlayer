@@ -3,6 +3,7 @@ package com.example.audioplayer;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -12,12 +13,15 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
@@ -25,12 +29,13 @@ import com.google.android.material.tabs.TabLayout;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     public static final int REQUEST_CODE =1;
     static ArrayList<MusicFiles> musicFiles;
     static boolean shuffleBoolean = false, repeatBoolean = false;
     static ArrayList<MusicFiles> albums = new ArrayList<>();
+    private String MY_SORT_PREF = "SortOrder";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,10 +115,34 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static ArrayList<MusicFiles> getAllAudio(Context context) {
+    public ArrayList<MusicFiles> getAllAudio(Context context) {
+        SharedPreferences preferences = getSharedPreferences(MY_SORT_PREF, MODE_PRIVATE);
+        String sortOrder = preferences.getString("sorting", "sortByNameAsc");
         ArrayList<String> duplicate = new ArrayList<>();
+        albums.clear();
         ArrayList<MusicFiles> tempAudioList = new ArrayList<>();
+        String order = null;
         Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+        switch (sortOrder) {
+            case "sortByNameAsc":
+                order = MediaStore.MediaColumns.DISPLAY_NAME + " ASC";
+                break;
+            case "sortByNameDesc":
+                order = MediaStore.MediaColumns.DISPLAY_NAME + " DESC";
+                break;
+            case "sortByDateAsc":
+                order = MediaStore.MediaColumns.DATE_ADDED + " ASC";
+                break;
+            case "sortByDateDesc":
+                order = MediaStore.MediaColumns.DATE_ADDED + " DESC";
+                break;
+            case "sortBySizeAsc":
+                order = MediaStore.MediaColumns.SIZE + " ASC";
+                break;
+            case "sortBySizeDesc":
+                order = MediaStore.MediaColumns.SIZE + " DESC";
+                break;
+        }
         String[] projection = {
                 MediaStore.Audio.Media.ALBUM,
                 MediaStore.Audio.Media.TITLE,
@@ -123,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                 MediaStore.Audio.Media._ID
         };
         Cursor cursor = context.getContentResolver().query(
-                uri, projection, null, null, null
+                uri, projection, null, null, order
         );
         if (cursor != null) {
             while (cursor.moveToNext()) {
@@ -148,4 +177,68 @@ public class MainActivity extends AppCompatActivity {
         return tempAudioList;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search, menu);
+        MenuItem menuItem = menu.findItem(R.id.search_option);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setOnQueryTextListener(this);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        String userInput = newText.toLowerCase();
+        ArrayList<MusicFiles> myFiles = new ArrayList<>();
+        for (MusicFiles song : musicFiles) {
+            if (song.getTitle().toLowerCase().contains(userInput)) {
+                myFiles.add(song);
+            }
+        }
+        SongsFragment.musicAdapter.updateList(myFiles);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        SharedPreferences.Editor editor = getSharedPreferences(MY_SORT_PREF, MODE_PRIVATE).edit();
+        switch (item.getItemId()) {
+            case R.id.by_name_asc:
+                editor.putString("sorting", "sortByNameAsc");
+                editor.apply();
+                this.recreate();
+                break;
+            case R.id.by_name_desc:
+                editor.putString("sorting", "sortByNameDesc");
+                editor.apply();
+                this.recreate();
+                break;
+            case R.id.by_date_asc:
+                editor.putString("sorting", "sortByDateAsc");
+                editor.apply();
+                this.recreate();
+                break;
+            case R.id.by_date_desc:
+                editor.putString("sorting", "sortByDateDesc");
+                editor.apply();
+                this.recreate();
+                break;
+            case R.id.by_size_asc:
+                editor.putString("sorting", "sortBySizeAsc");
+                editor.apply();
+                this.recreate();
+                break;
+            case R.id.by_size_desc:
+                editor.putString("sorting", "sortBySizeDesc");
+                editor.apply();
+                this.recreate();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

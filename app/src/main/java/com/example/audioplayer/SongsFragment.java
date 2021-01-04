@@ -11,11 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import static com.example.audioplayer.MainActivity.musicFiles;
+import static com.example.audioplayer.MusicAdapter.mFiles;
 
 public class SongsFragment extends Fragment {
 
     RecyclerView recyclerView;
-    MusicAdapter musicAdapter;
+    static MusicAdapter musicAdapter;
 
     public SongsFragment() {
         // Required empty public constructor

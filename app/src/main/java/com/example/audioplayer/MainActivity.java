@@ -177,6 +177,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         return tempAudioList;
     }
 
+    // Create search bar UI
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search, menu);
@@ -186,11 +187,13 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         return super.onCreateOptionsMenu(menu);
     }
 
+    // Handle submit button on search bar
     @Override
     public boolean onQueryTextSubmit(String query) {
         return false;
     }
 
+    // Handle text change in search bar
     @Override
     public boolean onQueryTextChange(String newText) {
         String userInput = newText.toLowerCase();

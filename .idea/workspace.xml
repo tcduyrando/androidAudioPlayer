@@ -9,13 +9,25 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d213da16-e4fd-42fb-8d93-4b6f4c879c30" name="Default Changelist" comment="" />
+    <list default="true" id="d213da16-e4fd-42fb-8d93-4b6f4c879c30" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/audioplayer/MusicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/audioplayer/MusicService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/audioplayer/PlayerActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/audioplayer/PlayerActivity.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[Pixel_3a_XL_API_27]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -42,6 +54,8 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_3a_XL_API_27" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-01-17T15:20:01.185Z" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -126,26 +140,30 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="92" y="92" width="2376" height="1256" key="AVDManager" timestamp="1607873364277">
+    <state x="1085" y="426" key="#com.intellij.ide.util.MemberChooser" timestamp="1610899815509">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state x="92" y="92" width="2376" height="1256" key="AVDManager/0.0.2560.1440@0.0.2560.1440" timestamp="1607873364277" />
-    <state width="2516" height="415" key="GridCell.Tab.0.bottom" timestamp="1608133135379">
+    <state x="1085" y="426" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1440@0.0.2560.1440" timestamp="1610899815509" />
+    <state x="92" y="92" width="2376" height="1256" key="AVDManager" timestamp="1610896798090">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="2516" height="415" key="GridCell.Tab.0.bottom/0.0.2560.1440@0.0.2560.1440" timestamp="1608133135379" />
-    <state width="2516" height="415" key="GridCell.Tab.0.center" timestamp="1608133135379">
+    <state x="92" y="92" width="2376" height="1256" key="AVDManager/0.0.2560.1440@0.0.2560.1440" timestamp="1610896798090" />
+    <state width="2516" height="415" key="GridCell.Tab.0.bottom" timestamp="1610896900550">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="2516" height="415" key="GridCell.Tab.0.center/0.0.2560.1440@0.0.2560.1440" timestamp="1608133135379" />
-    <state width="2516" height="415" key="GridCell.Tab.0.left" timestamp="1608133135379">
+    <state width="2516" height="415" key="GridCell.Tab.0.bottom/0.0.2560.1440@0.0.2560.1440" timestamp="1610896900550" />
+    <state width="2516" height="415" key="GridCell.Tab.0.center" timestamp="1610896900550">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="2516" height="415" key="GridCell.Tab.0.left/0.0.2560.1440@0.0.2560.1440" timestamp="1608133135379" />
-    <state width="2516" height="415" key="GridCell.Tab.0.right" timestamp="1608133135379">
+    <state width="2516" height="415" key="GridCell.Tab.0.center/0.0.2560.1440@0.0.2560.1440" timestamp="1610896900550" />
+    <state width="2516" height="415" key="GridCell.Tab.0.left" timestamp="1610896900550">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="2516" height="415" key="GridCell.Tab.0.right/0.0.2560.1440@0.0.2560.1440" timestamp="1608133135379" />
+    <state width="2516" height="415" key="GridCell.Tab.0.left/0.0.2560.1440@0.0.2560.1440" timestamp="1610896900550" />
+    <state width="2516" height="415" key="GridCell.Tab.0.right" timestamp="1610896900550">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state width="2516" height="415" key="GridCell.Tab.0.right/0.0.2560.1440@0.0.2560.1440" timestamp="1610896900550" />
     <state width="2516" height="413" key="GridCell.Tab.1.bottom" timestamp="1608133133284">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
@@ -166,5 +184,9 @@
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="750" y="391" key="SettingsEditor/0.0.2560.1440@0.0.2560.1440" timestamp="1607442986843" />
+    <state x="987" y="276" width="585" height="888" key="find.popup" timestamp="1610898534984">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="987" y="276" width="585" height="888" key="find.popup/0.0.2560.1440@0.0.2560.1440" timestamp="1610898534984" />
   </component>
 </project>

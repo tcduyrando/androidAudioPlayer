@@ -51,7 +51,7 @@ public class PlayerActivity extends AppCompatActivity
     ImageView cover_art, nextBtn, prevBtn, backBtn, menuBtn, shuffleBtn, repeatBtn;
     FloatingActionButton playPauseBtn;
     SeekBar seekBar;
-    int position = -1;
+    int position = 0;
     static ArrayList<MusicFiles> listSongs = new ArrayList<>();
     static Uri uri;
 //    static MediaPlayer mediaPlayer;
@@ -446,9 +446,6 @@ public class PlayerActivity extends AppCompatActivity
         if (musicService != null) {
             musicService.stop();
             musicService.release();
-            musicService.createMediaPlayer(position);
-            musicService.start();
-        } else {
             musicService.createMediaPlayer(position);
             musicService.start();
         }

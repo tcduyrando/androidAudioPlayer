@@ -95,6 +95,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         return START_STICKY;
     }
 
+    // Fix bugs and minor conventions
     private void playMedia(int startPosition) {
         musicFiles = listSongs;
         position = startPosition;
